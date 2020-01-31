@@ -11,7 +11,7 @@ var argv = require('yargs')
         .argv;
 
 exports.server = {
-	port: argv.port || 8080,
+	port: argv.port || 8089,
 	baseurl: argv.baseurl || '/'
 };
 
@@ -23,6 +23,5 @@ exports.googleanalytics = {
 exports.database = {
 	type: 'redis',
 	prefix: '#scrumblr#',
-	redis: argv.redis || '127.0.0.1:6379'
+	redis: argv.redis || 'redis://192.168.10.148:6379'
 };
-
