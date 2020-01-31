@@ -59,7 +59,7 @@ router.get('/', function(req, res) {
 	var connected = io.sockets.connected;
 	clientsCount = Object.keys(connected).length;
 
-	res.render('home.jade', {
+	res.render('home.pug', {
 		url: url,
 		connected: clientsCount
 	});
@@ -67,14 +67,14 @@ router.get('/', function(req, res) {
 
 
 router.get('/demo', function(req, res) {
-	res.render('index.jade', {
+	res.render('index.pug', {
 		pageTitle: 'scrumblr - demo',
 		demo: true
 	});
 });
 
 router.get('/:id', function(req, res){
-	res.render('index.jade', {
+	res.render('index.pug', {
 		pageTitle: ('scrumblr - ' + req.params.id)
 	});
 });
