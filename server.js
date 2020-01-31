@@ -43,7 +43,7 @@ console.log('Server running at http://127.0.0.1:' + conf.port + '/');
 /**************
  SETUP Socket.IO
 **************/
-var io = require('socket.io')(server, {
+const io = require('socket.io')(server, {
 	path: conf.baseurl == '/' ? '' : conf.baseurl + "/socket.io"
 });
 
@@ -53,10 +53,10 @@ var io = require('socket.io')(server, {
 **************/
 router.get('/', function(req, res) {
 	//console.log(req.header('host'));
-	url = req.header('host') + req.baseUrl;
+	let url = req.header('host') + req.baseUrl;
 
-	var connected = io.sockets.connected;
-	clientsCount = Object.keys(connected).length;
+	const connected = io.sockets.connected;
+	let clientsCount = Object.keys(connected).length;
 
 	res.render('home.pug', {
 		url: url,
@@ -271,15 +271,15 @@ io.sockets.on('connection', function (client) {
 
 				setUserName(client, clean_message.data);
 
-				var msg = {};
+				let msg = {};
 				msg.action = 'nameChangeAnnounce';
 				msg.data = { sid: client.id, user_name: clean_message.data };
 				broadcastToRoom( client, msg );
 				break;
 
 			case 'addSticker':
-				var cardId = scrub(message.data.cardId);
-				var stickerId = scrub(message.data.stickerId);
+				let cardId = scrub(message.data.cardId);
+				let stickerId = scrub(message.data.stickerId);
 
 				getRoom(client, function(room) {
 					db.addSticker( room , cardId, stickerId );
@@ -290,7 +290,7 @@ io.sockets.on('connection', function (client) {
 
 			case 'setBoardSize':
 
-				var size = {};
+				let size = {};
 				size.width = scrub(message.data.width);
 				size.height = scrub(message.data.height);
 
