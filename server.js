@@ -1,32 +1,31 @@
 /**************
  SYSTEM INCLUDES
-**************/
-var	http = require('http');
-var sys = require('sys');
-var	async = require('async');
-var sanitizer = require('sanitizer');
-var compression = require('compression');
-var express = require('express');
-var conf = require('./config.js').server;
-var ga = require('./config.js').googleanalytics;
+ **************/
+const http = require('http');
+const sys = require('sys');
+const async = require('async');
+const sanitizer = require('sanitizer');
+const compression = require('compression');
+const express = require('express');
+const conf = require('./config.js').server;
+const ga = require('./config.js').googleanalytics;
 
 /**************
  LOCAL INCLUDES
-**************/
-var	rooms	= require('./lib/rooms.js');
-var	data	= require('./lib/data.js').db;
+ **************/
+const rooms = require('./lib/rooms.js');
+let data = require('./lib/data.js').db;
 
 /**************
  GLOBALS
-**************/
-//Map of sids to user_names
-var sids_to_user_names = [];
+ **************/
+const sids_to_user_names = [];
 
 /**************
  SETUP EXPRESS
-**************/
-var app = express();
-var router = express.Router();
+ **************/
+const app = express();
+const router = express.Router();
 
 app.use(compression());
 app.use(conf.baseurl, router);
