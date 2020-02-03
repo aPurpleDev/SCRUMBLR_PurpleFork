@@ -86,10 +86,12 @@ function getMessage(m) {
             break;
 
         case 'moveCard':
+            //console.log('in movecard event');
             moveCard($("#" + data.id), data.position);
             break;
 
         case 'initCards':
+            console.log('in initCard event');
             initCards(data);
             break;
 
@@ -162,7 +164,7 @@ $(document).bind('keyup', function(event) {
 
 function drawNewCard(id, text, x, y, rot, colour, sticker, animationspeed) {
     //cards[id] = {id: id, text: text, x: x, y: y, rot: rot, colour: colour};
-
+    console.log('Draw new card event');
     var h = '<div id="' + id + '" class="card ' + colour +
         ' draggable" style="-webkit-transform:rotate(' + rot +
         'deg);\

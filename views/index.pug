@@ -6,6 +6,7 @@ block body
 
 	//div.config
 	//	i.fa.fa-cog.fa-lg.faded-icon
+	//div(onclick='myFunction(' + '"' + someVar + '"' + ',' + '"' + someVar + '"' + ')')   -- .PUG event listener handling
 
 	h1 <a href="http://scrumblr.ca">scrumblr</a> by <a href="http://aliasaria.ca">aliasaria</a>
 
@@ -22,9 +23,8 @@ block body
 						image#add-col.col-icon(width='20', height='20', src='images/icons/iconic/raster/black/plus_alt_32x32.png')
 						image#delete-col.col-icon(width='20', height='20', src='images/icons/iconic/raster/black/minus_alt_32x32.png')
 
-
 	div.buttons
-		i#create-card.fa.fa-plus-circle.fa-2x.bottom-icon
+		i#create-card.fa.fa-plus-circle.fa-2x.bottom-icon(onclick='label = prompt("Enter a Label for the card","task"); console.log(`The card label is: ${label}`)')
 		i#smallify.fa.fa-expand.fa-2x.bottom-icon
 
 
@@ -65,4 +65,7 @@ block body
 
 	//<div style="width: 980px; height: 450px; border: solid 2px; opacity:.1; margin-top: 100px"> this will be the backlog that only appears on drag or perhaps not at all</div>
 
-	<script type="text/javascript">	  var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-2069672-4']);  _gaq.push(['_trackPageview']);   (function() {    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);  })(); </script>
+	<script type="text/javascript">	var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-2069672-4']);  _gaq.push(['_trackPageview']);   (function() {    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);  })(); </script>
+
+	//<script type="text/javascript"> $('body').on("click mousedown mouseup focus blur keydown change mouseup click dblclick mousemove mouseover mouseout mousewheel keydown keyup keypress textInput touchstart touchmove touchend touchcancel resize scroll zoom focus blur select change submit reset",function(e){ console.log(e); }); </script>
+
