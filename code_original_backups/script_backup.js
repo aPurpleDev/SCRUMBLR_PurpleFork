@@ -164,11 +164,7 @@ $(document).bind('keyup', function(event) {
 
 function drawNewCard(id, text, x, y, rot, colour, sticker, animationspeed) {
     //cards[id] = {id: id, text: text, x: x, y: y, rot: rot, colour: colour};
-    //$.dialog();
-
     console.log('Draw new card event');
-
-
     var h = '<div id="' + id + '" class="card ' + colour +
         ' draggable" style="-webkit-transform:rotate(' + rot +
         'deg);\
@@ -270,7 +266,6 @@ function drawNewCard(id, text, x, y, rot, colour, sticker, animationspeed) {
         function() {
             $(this).removeClass('hover');
             $(this).children('.card-icon').fadeOut(150);
-            $(this).children('.card-icon').fadeOut(150);
         }
     );
 
@@ -319,8 +314,7 @@ function onCardChange(id, text) {
     });
 }
 
-function moveCard(card, position) { //TODO find when this is called
-    console.log('in custom movecard', position);
+function moveCard(card, position) {
     card.animate({
         left: position.left + "px",
         top: position.top + "px"
@@ -329,7 +323,6 @@ function moveCard(card, position) { //TODO find when this is called
 
 function addSticker(cardId, stickerId) {
 
-    console.log('in sticker feature', cardId, stickerId);
     stickerContainer = $('#' + cardId + ' .filler');
 
     if (stickerId === "nosticker") {
@@ -356,35 +349,6 @@ function addSticker(cardId, stickerId) {
 // cards
 //----------------------------------
 function createCard(id, text, x, y, rot, colour) {
-    console.log('in createCard');
-
-    /*var choiceColor = window.prompt("Choose this card's color (blue, green, white, yellow);","blue"); https://stackoverflow.com/questions/44211116/does-my-own-prompt-window-stops-javascript-execution
-
-    switch(choiceColor.toLowerCase()) {
-        case 'blue':
-            return colour = 'blue';
-            break;
-
-        case 'green':
-            return colour = 'green';
-            break;
-
-        case 'yellow':
-            return colour = 'yellow';
-            break;
-
-        case 'white':
-            return colour = 'yellow';
-            break;
-
-        default:
-            return colour = 'white';
-            break;
-    }
-
-    console.log('coulour passed to draw new card', colour);
-    */
-
     drawNewCard(id, text, x, y, rot, colour, null);
 
     var action = "createCard";
