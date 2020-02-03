@@ -358,7 +358,7 @@ function addSticker(cardId, stickerId) {
 function createCard(id, text, x, y, rot, colour) {
     console.log('in createCard');
 
-    /*var choiceColor = window.prompt("Choose this card's color (blue, green, white, yellow);","blue"); https://stackoverflow.com/questions/44211116/does-my-own-prompt-window-stops-javascript-execution
+    var choiceColor = window.prompt("Choose this card's color (blue, green, white, yellow);","blue");
 
     switch(choiceColor.toLowerCase()) {
         case 'blue':
@@ -383,7 +383,6 @@ function createCard(id, text, x, y, rot, colour) {
     }
 
     console.log('coulour passed to draw new card', colour);
-    */
 
     drawNewCard(id, text, x, y, rot, colour, null);
 
