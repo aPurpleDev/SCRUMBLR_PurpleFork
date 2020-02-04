@@ -362,23 +362,23 @@ function createCard(id, text, x, y, rot, colour) {
 
     switch(choiceColor.toLowerCase()) {
         case 'blue':
-            return colour = 'blue';
+            colour = 'blue';
             break;
 
         case 'green':
-            return colour = 'green';
+            colour = 'green';
             break;
 
         case 'yellow':
-            return colour = 'yellow';
+            colour = 'yellow';
             break;
 
         case 'white':
-            return colour = 'yellow';
+            colour = 'white';
             break;
 
         default:
-            return colour = 'white';
+            colour = 'white';
             break;
     }
 
