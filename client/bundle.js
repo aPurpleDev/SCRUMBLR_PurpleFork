@@ -361,10 +361,18 @@ function addSticker(cardId, stickerId) {
 async function createCard(id, text, x, y, rot, colour) {
     console.log('in createCard');
     var choiceColor;
+    var label;
 
     await Swal.fire({
         title: 'Submit your card Colour',
-        input: 'text',
+        input: 'select',
+        icon:'info',
+        inputOptions: {
+            green: 'Green',
+            yellow: 'Yellow',
+            blue: 'Blue',
+            white: 'White'
+        },
         inputAttributes: {
             autocapitalize: 'off'
         },
@@ -376,7 +384,20 @@ async function createCard(id, text, x, y, rot, colour) {
         if (result.value) {
            choiceColor = result.value;
         }
-    }).catch( (e) => console.error(e) );
+    }).then( () => {
+        Swal.fire({
+            title: 'Enter a label for your Card',
+            input: 'text',
+            showCancelButton: true,
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'This plugin enforces Labels as mandatory'
+                }
+                label = value;
+            }
+        })
+    })
+        .catch( (e) => console.error(e) );
 
     switch (choiceColor.toLowerCase()) {
         case 'blue':
