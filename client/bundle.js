@@ -165,7 +165,7 @@ $(document).bind('keyup', function (event) {
     keyTrap = event.which;
 });
 
-function drawNewCard(id, text, x, y, rot, colour, sticker, animationspeed) {
+function drawNewCard(id, text, x, y, rot, colour, sticker, animationspeed, label="default label"){
     //cards[id] = {id: id, text: text, x: x, y: y, rot: rot, colour: colour};
     //$.dialog();
 
@@ -179,9 +179,13 @@ function drawNewCard(id, text, x, y, rot, colour, sticker, animationspeed) {
 	<img src="images/icons/token/Xion.png" class="card-icon delete-card-icon" />\
 	<img class="card-image" src="images/' +
         colour + '-card.png">\
-	<div id="content:' + id +
+        \<div id="label:' + id +
         '" class="content stickertarget droppable">' +
-        text + '</div><span class="filler"></span>\
+        label + '</div>\
+	<div id="content:' + id +
+        '" class="content stickertarget droppable" style="margin-top: 5%">' +
+        text + '</div>\
+        <span class="filler"></span>\
 	</div>';
 
     var card = $(h);
@@ -361,7 +365,6 @@ function addSticker(cardId, stickerId) {
 async function createCard(id, text, x, y, rot, colour) {
     console.log('in createCard');
     var choiceColor;
-    var label;
 
     await Swal.fire({
         title: 'Submit your card Colour',
@@ -384,8 +387,9 @@ async function createCard(id, text, x, y, rot, colour) {
         if (result.value) {
            choiceColor = result.value;
         }
-    }).then( () => {
-        Swal.fire({
+    });
+
+    var label = await Swal.fire({
             title: 'Enter a label for your Card',
             input: 'text',
             showCancelButton: true,
@@ -393,12 +397,13 @@ async function createCard(id, text, x, y, rot, colour) {
                 if (!value) {
                     return 'This plugin enforces Labels as mandatory'
                 }
-                label = value;
-                console.log('Generated card label is',label);
             }
-        })
-    })
-        .catch( (e) => console.error(e) );
+        });
+        //.catch( (e) => console.error(e) );
+
+    label = label.value;
+
+    console.log('label right after Swal fire assignment: ', label);
 
     switch (choiceColor.toLowerCase()) {
         case 'blue':
@@ -424,7 +429,7 @@ async function createCard(id, text, x, y, rot, colour) {
 
     console.log('coulour passed to draw new card', colour);
 
-    drawNewCard(id, text, x, y, rot, colour, null);
+    drawNewCard(id, text, x, y, rot, colour, null, null, label);
 
     var action = "createCard";
 
