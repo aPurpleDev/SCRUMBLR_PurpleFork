@@ -165,7 +165,7 @@ $(document).bind('keyup', function (event) {
     keyTrap = event.which;
 });
 
-function drawNewCard(id, text, x, y, rot, colour, sticker, animationspeed, label="default label", difficulty="default difficulty"){
+function drawNewCard(id, text, x, y, rot, colour, sticker, animationspeed, label = "default label", difficulty = "default difficulty") {
     //cards[id] = {id: id, text: text, x: x, y: y, rot: rot, colour: colour};
     //$.dialog();
 
@@ -187,7 +187,7 @@ function drawNewCard(id, text, x, y, rot, colour, sticker, animationspeed, label
         text + '</div>\
         <span class="filler"></span>\
 	<div id="difficulty:' + id +
-        '" class="content stickertarget droppable" style="margin-top: 10%">' +
+        '" class="content stickertarget droppable" style="margin-top: 30%">' +
         difficulty + '</div>\
 	</div>';
 
@@ -368,56 +368,57 @@ function addSticker(cardId, stickerId) {
 async function createCard(id, text, x, y, rot, colour) {
     console.log('in createCard');
     var choiceColor;
+    var label;
+    var difficulty;
 
-    await Swal.fire({
-        title: 'Submit your card Colour',
-        input: 'select',
-        icon:'info',
-        inputOptions: {
-            green: 'Green',
-            yellow: 'Yellow',
-            blue: 'Blue',
-            white: 'White'
-        },
-        inputAttributes: {
-            autocapitalize: 'off'
-        },
-        showCancelButton: false,
-        confirmButtonText: 'OK',
-        showLoaderOnConfirm: true,
-        allowOutsideClick: () => !Swal.isLoading()
-    }).then((result) => {
-        if (result.value) {
-           choiceColor = result.value;
-        }
-    });
+    //color label difficulty in queue
+    const userInput = await Swal.mixin({
 
-    var label = await Swal.fire({
-            title: 'Enter a label for your Card',
-            input: 'text',
-            showCancelButton: true,
+        confirmButtonText: 'Next &rarr;',
+        showCancelButton: true,
+        progressSteps: ['1', '2', '3']
+    }).queue([
+        {
+            title: 'Colour',
+            text: 'Choose a colour for your new card', input: 'select', inputOptions: {
+                green: 'Green',
+                yellow: 'Yellow',
+                blue: 'Blue',
+                white: 'White'
+            },
             inputValidator: (value) => {
                 if (!value) {
-                    return 'This plugin enforces Labels as mandatory'
+                    return 'This plugin enforces Colour choice as mandatory'
                 }
             }
-        });
-        //.catch( (e) => console.error(e) );
-    label = label.value;
-
-
-    var difficulty = await Swal.fire({
-        title: `Enter a difficulty for this Card`,
-        input: 'text',
-        showCancelButton: true,
-        inputValidator: (value) => {
-            if (!value) {
-                return 'This plugin enforces Difficulty as mandatory'
+        }, {
+            title: 'Label',
+            text: 'Write the Label related to this card', input: 'text', inputValidator: (value) => {
+                if (!value) {
+                    return 'This plugin enforces Label input as mandatory'
+                }
+            }
+            },{
+            title: 'Difficulty',
+            text: 'How difficult is picking up this card?', input: 'select', inputOptions: {
+                easy: 'Easy',
+                average: 'Average',
+                hard: 'Hard',
+                extreme: 'Extreme'
+            },
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'This plugin enforces Difficulty choice as mandatory'
+                }
             }
         }
-    });
-
-    difficulty = difficulty.value;
+    ]).then((result) => {
+        if (result.value) {
+            choiceColor = result.value[0];
+            label = result.value[1];
+            difficulty = result.value[2];
+        }
+    }).catch(e => console.error(e));
 
     console.log('label right after Swal fire assignment: ', label);
 
