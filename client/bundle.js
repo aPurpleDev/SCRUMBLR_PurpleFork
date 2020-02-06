@@ -183,7 +183,7 @@ function drawNewCard(id, text, x, y, rot, colour, sticker, animationspeed, label
         '" class="content stickertarget droppable">' +
         label + '</div>\
 	<div id="content:' + id +
-        '" class="content stickertarget droppable" style="margin-top: 5%">' +
+        '" class="content stickertarget droppable" style="margin-top: 10%">' +
         text + '</div>\
         <span class="filler"></span>\
 	</div>';
