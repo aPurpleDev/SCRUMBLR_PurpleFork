@@ -394,6 +394,7 @@ async function createCard(id, text, x, y, rot, colour) {
                     return 'This plugin enforces Labels as mandatory'
                 }
                 label = value;
+                console.log('Generated card label is',label);
             }
         })
     })
