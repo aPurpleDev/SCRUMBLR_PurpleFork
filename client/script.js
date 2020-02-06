@@ -164,7 +164,7 @@ $(document).bind('keyup', function (event) {
     keyTrap = event.which;
 });
 
-function drawNewCard(id, text, x, y, rot, colour, sticker, animationspeed, label="default label"){
+function drawNewCard(id, text, x, y, rot, colour, sticker, animationspeed, label="default label", difficulty="default difficulty"){
     //cards[id] = {id: id, text: text, x: x, y: y, rot: rot, colour: colour};
     //$.dialog();
 
@@ -185,6 +185,9 @@ function drawNewCard(id, text, x, y, rot, colour, sticker, animationspeed, label
         '" class="content stickertarget droppable" style="margin-top: 10%">' +
         text + '</div>\
         <span class="filler"></span>\
+	<div id="difficulty:' + id +
+        '" class="content stickertarget droppable" style="margin-top: 30%">' +
+        difficulty + '</div>\
 	</div>';
 
     var card = $(h);
@@ -399,8 +402,21 @@ async function createCard(id, text, x, y, rot, colour) {
             }
         });
         //.catch( (e) => console.error(e) );
-
     label = label.value;
+
+
+    var difficulty = await Swal.fire({
+        title: `Enter a difficulty for this Card`,
+        input: 'text',
+        showCancelButton: true,
+        inputValidator: (value) => {
+            if (!value) {
+                return 'This plugin enforces Difficulty as mandatory'
+            }
+        }
+    });
+
+    difficulty = difficulty.value;
 
     console.log('label right after Swal fire assignment: ', label);
 
@@ -428,7 +444,7 @@ async function createCard(id, text, x, y, rot, colour) {
 
     console.log('coulour passed to draw new card', colour);
 
-    drawNewCard(id, text, x, y, rot, colour, null, null, label);
+    drawNewCard(id, text, x, y, rot, colour, null, null, label, difficulty);
 
     var action = "createCard";
 
