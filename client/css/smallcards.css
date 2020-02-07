@@ -90,3 +90,7 @@
 	text-align: center;
 	padding-top: 8px;
 }
+
+.label, .difficulty{
+	display: none;
+}

@@ -179,14 +179,14 @@ function drawNewCard(id, text, x, y, rot, colour, sticker, animationspeed, label
 	<img class="card-image" src="images/' +
         colour + '-card.png">\
         \<div id="label:' + id +
-        '" class="content stickertarget droppable">' +
+        '" class="label content stickertarget droppable">' +
         label + '</div>\
 	<div id="content:' + id +
         '" class="content stickertarget droppable" style="margin-top: 10%">' +
         text + '</div>\
         <span class="filler"></span>\
 	<div id="difficulty:' + id +
-        '" class="content stickertarget droppable" style="margin-top: 30%">' +
+        '" class="difficulty content stickertarget droppable" style="margin-top: 30%">' +
         difficulty + '</div>\
 	</div>';
 
