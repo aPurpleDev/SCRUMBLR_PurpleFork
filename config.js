@@ -7,21 +7,21 @@
 */
 
 var argv = require('yargs')
-        .usage('Usage: $0 [--port INTEGER [8080]] [--baseurl STRING ["/"]] [--redis STRING:INT [127.0.0.1:6379]] [--gaEnabled] [--gaAccount STRING [UA-2069672-4]]')
-        .argv;
+    .usage('Usage: $0 [--port INTEGER [8080]] [--baseurl STRING ["/"]] [--redis STRING:INT [127.0.0.1:6379]] [--gaEnabled] [--gaAccount STRING [UA-2069672-4]]')
+    .argv;
 
 exports.server = {
-	port: argv.port || 8089,
-	baseurl: argv.baseurl || '/'
+    port: argv.port || 8089,
+    baseurl: argv.baseurl || '/'
 };
 
 exports.googleanalytics = {
-	enabled: argv['gaEnabled'] || false,
-	account: argv['gaAccount'] || "UA-2069672-4"
+    enabled: argv['gaEnabled'] || false,
+    account: argv['gaAccount'] || "UA-2069672-4"
 };
 
 exports.database = {
-	type: 'redis',
-	prefix: '#scrumblr#',
-	redis: argv.redis || 'redis://192.168.10.90:6379'
+    type: 'redis',
+    prefix: '#scrumblr#',
+    redis: argv.redis || 'redis://192.168.10.90:6379'
 };

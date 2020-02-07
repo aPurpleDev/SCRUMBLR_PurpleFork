@@ -93,7 +93,6 @@ function getMessage(m) {
             break;
 
         case 'initCards':
-            console.log('in initCard event');
             initCards(data);
             break;
 
@@ -167,9 +166,6 @@ $(document).bind('keyup', function (event) {
 function drawNewCard(id, text, x, y, rot, colour, sticker, animationspeed, label = "default label", difficulty = "default difficulty") {
     //cards[id] = {id: id, text: text, x: x, y: y, rot: rot, colour: colour};
     //$.dialog();
-
-    console.log('Draw new card event');
-
 
     var h = '<div id="' + id + '" class="card ' + colour +
         ' draggable" style="-webkit-transform:rotate(' + rot +
@@ -329,7 +325,6 @@ function onCardChange(id, text) {
 }
 
 function moveCard(card, position) { //TODO find when this is called
-    console.log('in custom movecard', position);
     card.animate({
         left: position.left + "px",
         top: position.top + "px"
@@ -338,7 +333,6 @@ function moveCard(card, position) { //TODO find when this is called
 
 function addSticker(cardId, stickerId) {
 
-    console.log('in sticker feature', cardId, stickerId);
     stickerContainer = $('#' + cardId + ' .filler');
 
     if (stickerId === "nosticker") {
@@ -365,7 +359,6 @@ function addSticker(cardId, stickerId) {
 // cards
 //----------------------------------
 async function createCard(id, text, x, y, rot, colour) {
-    console.log('in createCard');
     var choiceColor;
     var label;
     var difficulty;
@@ -397,7 +390,7 @@ async function createCard(id, text, x, y, rot, colour) {
                     return 'This plugin enforces Label input as mandatory'
                 }
             }
-            },{
+        }, {
             title: 'Difficulty',
             text: 'How difficult is picking up this card?', input: 'select', inputOptions: {
                 easy: 'Easy',
@@ -418,8 +411,6 @@ async function createCard(id, text, x, y, rot, colour) {
             difficulty = result.value[2];
         }
     }).catch(e => console.error(e));
-
-    console.log('label right after Swal fire assignment: ', label);
 
     switch (choiceColor.toLowerCase()) {
         case 'blue':
@@ -442,8 +433,6 @@ async function createCard(id, text, x, y, rot, colour) {
             colour = 'white';
             break;
     }
-
-    console.log('coulour passed to draw new card', colour);
 
     drawNewCard(id, text, x, y, rot, colour, null, null, label, difficulty);
 
@@ -782,14 +771,16 @@ function adjustCard(offsets, doSync) {
 ////////// LABEL DISPLAY AND FILTERING ///////////////////
 //////////////////////////////////////////////////////////
 
-function labelHandler(cardArray){ //TODO Implement 1. Array with only unique label value, 2. divs with values above stickers
-    let onlyLabels = cardArray.map( (value) => value.label );
+function labelHandler(cardArray) { //TODO Implement 1. Array with only unique label value, 2. divs with values above stickers
+    let onlyLabels = cardArray.map((value) => value.label);
 
-    let displayedLabels = onlyLabels.filter( (v,i) => {
-     return onlyLabels.indexOf(v) === i;
+    let displayedLabels = onlyLabels.filter((v, i) => {
+        return onlyLabels.indexOf(v) === i;
     });
 
     console.log('Unique label Array ', displayedLabels)
+    //here each label is being appended, see line 174
+    //https://pugjs.org/language/iteration.html
 }
 
 //////////////////////////////////////////////////////////
