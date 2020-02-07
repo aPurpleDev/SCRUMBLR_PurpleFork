@@ -779,6 +779,20 @@ function adjustCard(offsets, doSync) {
 }
 
 //////////////////////////////////////////////////////////
+////////// LABEL DISPLAY AND FILTERING ///////////////////
+//////////////////////////////////////////////////////////
+
+function labelHandler(cardArray){ //TODO Implement 1. Array with only unique label value, 2. divs with values above stickers
+    let onlyLabels = cardArray.map( (value) => value.label );
+
+    let displayedLabels = onlyLabels.filter( (v,i) => {
+     return onlyLabels.indexOf(v) === i;
+    });
+
+    console.log('Unique label Array ', displayedLabels)
+}
+
+//////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////
 
 $(function () {
