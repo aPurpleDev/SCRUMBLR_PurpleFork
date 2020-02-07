@@ -99,9 +99,9 @@ function getMessage(m) {
             break;
 
         case 'createCard':
-            //console.log(data);
+            //console.log(data); supposed to persist all cards attribute
             drawNewCard(data.id, data.text, data.x, data.y, data.rot, data.colour,
-                null);
+                null, null, data.label, data.difficulty);
             break;
 
         case 'deleteCard':
@@ -456,7 +456,9 @@ async function createCard(id, text, x, y, rot, colour) {
         x: x,
         y: y,
         rot: rot,
-        colour: colour
+        colour: colour,
+        label: label,
+        difficulty: difficulty
     };
 
     sendAction(action, data);
@@ -489,7 +491,9 @@ function initCards(cardArray) {
             card.rot,
             card.colour,
             card.sticker,
-            0
+            0,
+            card.label,
+            card.difficulty
         );
     }
 

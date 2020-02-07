@@ -162,9 +162,11 @@ io.sockets.on('connection', function (client) {
 				clean_data.y = scrub(data.y);
 				clean_data.rot = scrub(data.rot);
 				clean_data.colour = scrub(data.colour);
+				clean_data.label = scrub(data.label);
+				clean_data.difficulty = scrub(data.difficulty);
 
 				getRoom(client, function(room) {
-					createCard( room, clean_data.id, clean_data.text, clean_data.x, clean_data.y, clean_data.rot, clean_data.colour);
+					createCard( room, clean_data.id, clean_data.text, clean_data.x, clean_data.y, clean_data.rot, clean_data.colour, clean_data.label,clean_data.difficulty);
 				});
 
 				message_out = {
@@ -428,7 +430,7 @@ function broadcastToRoom ( client, message ) {
 }
 
 //----------------CARD FUNCTIONS
-function createCard( room, id, text, x, y, rot, colour ) {
+function createCard( room, id, text, x, y, rot, colour, label, difficulty ) {
 	var card = {
 		id: id,
 		colour: colour,
@@ -436,7 +438,9 @@ function createCard( room, id, text, x, y, rot, colour ) {
 		x: x,
 		y: y,
 		text: text,
-		sticker: null
+		sticker: null,
+		label: label,
+		difficulty: difficulty
 	};
 
 	db.createCard(room, id, card);
