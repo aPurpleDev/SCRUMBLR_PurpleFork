@@ -163,7 +163,7 @@ $(document).bind('keyup', function (event) {
     keyTrap = event.which;
 });
 
-function drawNewCard(id, text, x, y, rot, colour, sticker, animationspeed, label = "default label", difficulty = "default difficulty") {
+function drawNewCard(id, text, x, y, rot, colour, sticker, animationspeed, label = "default label", difficulty = "default difficulty", cardArray = []) {
     //cards[id] = {id: id, text: text, x: x, y: y, rot: rot, colour: colour};
     //$.dialog();
 
@@ -314,6 +314,28 @@ function drawNewCard(id, text, x, y, rot, colour, sticker, animationspeed, label
     //add applicable sticker
     if (sticker !== null)
         addSticker(id, sticker);
+
+   /* let labelRelations = labelHandler(cardArray);
+    console.log('Labelhandler has: ', labelRelations); //TODO refresh label buttons on card draw
+
+    let uniqueLabels = [...new Set(labelRelations.map( item => item.label ))];
+    console.log('Uniqelabel has: ', uniqueLabels);
+
+
+    for (let j in uniqueLabels){
+        $('.button-sucess').remove();
+        var l = '<div class="label">\
+                 <button class="button-success">'
+            + uniqueLabels[j] + '\
+                 \</button>\
+	             </div>\
+	             &nbsp;';
+
+
+        var labelIcon = $(l);
+        labelIcon.appendTo('#icon-col');
+        console.log('appending label to page: ', uniqueLabels[j]);
+    }*/
 }
 
 
@@ -351,7 +373,6 @@ function addSticker(cardId, stickerId) {
             stickerContainer.prepend('<img src="images/stickers/' + stickerId +
                 '.png">');
     }
-
 }
 
 
@@ -487,21 +508,26 @@ function initCards(cardArray) {
             card.sticker,
             0,
             card.label,
-            card.difficulty
+            card.difficulty,
+            cardArray
         );
     }
 
+    boardInitialized = true;
+
     for (let j in uniqueLabels){
-        var l = '<div class="label">'
-                 + uniqueLabels[j] + '\
-	             </div>';
+        var l = '<div class="label">\
+                 <button class="button-success">'
+            + uniqueLabels[j] + '\
+                 \</button>\
+	             </div>\
+	             &nbsp;';
+
 
         var labelIcon = $(l);
         labelIcon.appendTo('#icon-col');
         console.log('appending label to page: ', uniqueLabels[j]);
     }
-
-    boardInitialized = true;
     unblockUI();
 }
 
