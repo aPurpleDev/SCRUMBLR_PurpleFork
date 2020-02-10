@@ -189,7 +189,6 @@ function drawNewCard(id, text, x, y, rot, colour, sticker, animationspeed, label
     var card = $(h);
     card.appendTo('#board');
 
-    //@TODO
     //Draggable has a bug which prevents blur event
     //http://bugs.jqueryui.com/ticket/4261
     //So we have to blur all the cards and editable areas when
@@ -346,7 +345,7 @@ function onCardChange(id, text) {
     });
 }
 
-function moveCard(card, position) { //TODO find when this is called
+function moveCard(card, position) {
     card.animate({
         left: position.left + "px",
         top: position.top + "px"
@@ -488,7 +487,7 @@ function initCards(cardArray) {
     $('.card').remove();
 
     let labelRelations = labelHandler(cardArray);
-    console.log('Labelhandler has: ', labelRelations); //TODO test and persistance
+    console.log('Labelhandler has: ', labelRelations);
 
     let uniqueLabels = [...new Set(labelRelations.map( item => item.label ))];
     console.log('Uniqelabel has: ', uniqueLabels);
@@ -517,7 +516,7 @@ function initCards(cardArray) {
 
     for (let j in uniqueLabels){
         var l = '<div class="label">\
-                 <button class="button-success">'
+                 <button class="content button-success">'
             + uniqueLabels[j] + '\
                  \</button>\
 	             </div>\
@@ -528,6 +527,8 @@ function initCards(cardArray) {
         labelIcon.appendTo('#icon-col');
         console.log('appending label to page: ', uniqueLabels[j]);
     }
+
+    //TODO https://stackoverflow.com/questions/25088379/create-filter-buttons-using-jquery
     unblockUI();
 }
 
