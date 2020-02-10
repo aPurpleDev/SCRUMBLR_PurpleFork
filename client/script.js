@@ -516,7 +516,7 @@ function initCards(cardArray) {
 
     for (let j in uniqueLabels){
         var l = '<div class="label">\
-                 <button class="content button-success">'
+                 <button class="button-success">'
             + uniqueLabels[j] + '\
                  \</button>\
 	             </div>\
@@ -524,7 +524,7 @@ function initCards(cardArray) {
 
 
         var labelIcon = $(l);
-        labelIcon.appendTo('#icon-col');
+        labelIcon.appendTo('#label-col');
         console.log('appending label to page: ', uniqueLabels[j]);
     }
 
