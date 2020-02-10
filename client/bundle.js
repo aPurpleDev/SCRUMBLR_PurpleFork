@@ -492,6 +492,16 @@ function initCards(cardArray) {
         );
     }
 
+    for (let j in uniqueLabels){
+        var l = '<div class="label">'
+                 + uniqueLabels[j] + '\
+	             </div>';
+
+        var labelIcon = $(l);
+        labelIcon.appendTo('#icon-col');
+        console.log('appending label to page: ', uniqueLabels[j]);
+    }
+
     boardInitialized = true;
     unblockUI();
 }
