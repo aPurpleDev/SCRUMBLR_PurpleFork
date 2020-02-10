@@ -466,6 +466,12 @@ function initCards(cardArray) {
     //first delete any cards that exist
     $('.card').remove();
 
+    let labelRelations = labelHandler(cardArray);
+    console.log('Labelhandler has: ', labelRelations); //TODO test and persistance
+
+    let uniqueLabels = [...new Set(labelRelations.map( item => item.label ))];
+    console.log('Uniqelabel has: ', uniqueLabels);
+
     cards = cardArray;
 
     for (var i in cardArray) {
@@ -771,16 +777,9 @@ function adjustCard(offsets, doSync) {
 ////////// LABEL DISPLAY AND FILTERING ///////////////////
 //////////////////////////////////////////////////////////
 
-function labelHandler(cardArray) { //TODO Implement 1. Array with only unique label value, 2. divs with values above stickers
-    let onlyLabels = cardArray.map((value) => value.label);
+function labelHandler(cardArray) {
 
-    let displayedLabels = onlyLabels.filter((v, i) => {
-        return onlyLabels.indexOf(v) === i;
-    });
-
-    console.log('Unique label Array ', displayedLabels)
-    //here each label is being appended, see line 174
-    //https://pugjs.org/language/iteration.html
+    return uniqueLabels = Array.from(new Set(cardArray));
 }
 
 //////////////////////////////////////////////////////////
