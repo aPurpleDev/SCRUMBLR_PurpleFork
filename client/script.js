@@ -514,7 +514,8 @@ function initCards(cardArray) {
 
     boardInitialized = true;
 
-    for (let j in uniqueLabels){
+    //for label buttons, unfinished work
+/*    for (let j in uniqueLabels){
         var l = '<div class="label">\
                  <button class="button-success">'
             + uniqueLabels[j] + '\
@@ -526,7 +527,7 @@ function initCards(cardArray) {
         var labelIcon = $(l);
         labelIcon.appendTo('#label-col');
         console.log('appending label to page: ', uniqueLabels[j]);
-    }
+    }*/
 
     //TODO https://stackoverflow.com/questions/25088379/create-filter-buttons-using-jquery
     unblockUI();
